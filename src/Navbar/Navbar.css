@@ -1,0 +1,73 @@
+.nav{
+    z-index: 3;
+    
+    width: 100%;
+    position:absolute;
+    position: sticky;
+    top: 0;
+    
+}
+.top-header{
+    /* background-color: hsl(30, 36%, 95%); */
+    background-color: transparent;
+    color: white;
+    display: flex;
+    width: 100%;
+    
+}
+.socials{
+    flex: 1;   
+    margin-top: 20px;
+    margin-left: 40px;
+}
+.imp{
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-right: 40px;
+    
+}
+.login{
+    display: flex;
+    justify-content: center;
+}
+.logo{
+    margin-top: 15px;
+    flex: 1;
+    width:202px ;
+    height:40px;
+}
+.space-right{
+    margin-right: 15px;
+}
+.space-left{
+    margin-left: 15px;
+}
+.wears{
+    display: flex;
+    align-items: center;
+    /* background-color: hsl(30, 36%, 95%); */
+    color: white;
+    background-color: transparent;
+    justify-content: center;
+}
+.wears>p{
+    margin: 10px;
+    font-size: 15px;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+    z-index: 3;
+}
+.wears>p:hover{
+    border-bottom: 1px solid black;
+}
+.mouse-in-nav{
+    background-color: hsl(30, 36%, 95%);
+    color: black;
+    
+    
+}
+.gayab{
+    display: none;
+}
