@@ -71,3 +71,60 @@
 .gayab{
     display: none;
 }
+
+
+.login_window{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.detailslogin{
+    background-color: hsl(0, 0%, 100%);
+    width: 500px;
+    height: 350px;
+    z-index: 5;
+}
+.logininp{
+    border: 1px solid rgba(0, 0, 0, 0.80);
+    width: 80%;
+    margin-top: 50px;
+}
+.loginbutt{
+    width: 80%;
+    height: 30px;
+    /* background-color: black; */
+    border: 1px solid black;
+    cursor: pointer;
+}
+.loginbutt:hover{
+    background-color: black;
+    color: white;
+}
+.registerinp{
+    border: 1px solid black;
+    margin: 10px;
+    margin-top: 30px;
+}
+.rinp{
+    border: 1px solid rgba(0, 0, 0, 0.80);
+    width: 80%;
+    margin-top: 30px;
+}
+.detailsregister{
+    background-color: hsl(0, 0%, 100%);
+    width: 500px;
+    height: 470px;
+    z-index: 4;
+}
+.alert{
+   
+    background-color: black;
+
+    box-shadow: 0px 0px 8px 0px rgb(223, 255, 255);
+}
