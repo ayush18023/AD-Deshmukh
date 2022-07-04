@@ -6,7 +6,7 @@
 }
 .slid{
     position:relative;
-    bottom:100px;
+    height: 750px;
 }
 .category-container>h1 {
     text-align: center;

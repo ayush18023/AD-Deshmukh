@@ -22,7 +22,6 @@
 .slider-container{
     display: flex;
     align-items: center;
-    -webkit-animation: slide-in 0.5s forwards;
 }
 
 @keyframes slide-in {

@@ -15,9 +15,8 @@ import {Link} from 'react-router-dom'
 const Men = () => {
   return (
     <>
-        <Navbar active=""/>   
-        <div className="absolute top-0"><img src="https://admin-valaya.perniapopup.studio/pub/media_valaya/promobanners/p/a/page-banner.png"  alt="" /></div> 
-        <hr className='border-white mt-80'/>
+        <Navbar active={0}/>   
+        <img src="https://admin-valaya.perniapopup.studio/pub/media_valaya/promobanners/p/a/page-banner.png"  alt="" /> 
         <div className='Sort_window h-full border-2'>
             <Breadcrumbs aria-label="breadcrumb" >
                 <Link to="/men">Home</Link>
@@ -25,15 +24,15 @@ const Men = () => {
             </Breadcrumbs>
             <div className="category_men">
                 
-            </div>
+        </div>
         </div>
         <div className='mt-10 men-container'>
             {Menimages.map((mi)=>(
                 <Link to={`/men/${mi.id}`}>
                     <div className='card' key={mi.id} >
                         <img src={mi.img}  alt="" />
-                        <p>{mi.title}</p>
-                        <p>&#8377;{mi.price}</p>
+                        <p className='text-base'>{mi.title}</p>
+                        <p className='text-base'>&#8377;{mi.price}</p>
                     </div> 
                 </Link>
                 

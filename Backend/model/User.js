@@ -17,6 +17,9 @@ const UserSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    customerid:{
+        type:String
+    }
 })
 const collectionname="User"
 const User=mongoose.model("User",UserSchema,collectionname)

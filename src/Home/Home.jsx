@@ -4,13 +4,13 @@ import Navbar from '../Navbar/Navbar'
 import './Home.css'
 import Lightbutton,{Darkbutton} from '../Components/Button'
 import Gallery from './Gallery'
-
+import {Link} from 'react-router-dom'
 
 const Home = () => {
   return (
     <div>
       {/* <div className="h-20px bg-black text-center text-white absolute w-100%">Contact us:+91-8800554491</div> */}
-        <Navbar/>
+        <Navbar active={0}/>
         
         <div className='slid'><Slider/></div>
       
@@ -21,7 +21,7 @@ const Home = () => {
             <span className="men relative flex items-end justify-center">
               <div className='absolute text-2xl text-white z-10 shift_up'>MEN</div>
               <img src="https://ik.imagekit.io/thestylist/valaya/pub/media_valaya/HOMEPAGE_IMAGES/13_May_22/Grid-2_(2).jpg" alt="" className='women-img'/>
-              <span className="absolute bottom-10"><Lightbutton text={"SHOP NOW"}/></span>
+              <span className="absolute bottom-10"><Link to='/men'><Lightbutton text={"SHOP NOW"}/></Link></span>
             </span>
             <span className="women relative flex items-end justify-center">
               <img src="https://ik.imagekit.io/thestylist/valaya/pub/media_valaya/HOMEPAGE_IMAGES/13_May_22/Grid-6.jpg" alt="" className='women-img'/>

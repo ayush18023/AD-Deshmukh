@@ -1,12 +1,12 @@
 .nav{
-    z-index: 3;
-    
+    z-index: 3;  
     width: 100%;
-    position:absolute;
-    position: sticky;
+    position: fixed;
     top: 0;
     
 }
+
+
 .top-header{
     /* background-color: hsl(30, 36%, 95%); */
     background-color: transparent;
@@ -65,7 +65,7 @@
 .mouse-in-nav{
     background-color: hsl(30, 36%, 95%);
     color: black;
-    
+   
     
 }
 .gayab{
@@ -83,12 +83,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 .detailslogin{
     background-color: hsl(0, 0%, 100%);
     width: 500px;
     height: 350px;
     z-index: 5;
+    animation: dropfromup 0.3s ease-in;
 }
 .logininp{
     border: 1px solid rgba(0, 0, 0, 0.80);
@@ -121,10 +123,40 @@
     width: 500px;
     height: 470px;
     z-index: 4;
+    animation: dropfromup 0.3s ease-in;
+    overflow: hidden;
 }
 .alert{
    
     background-color: black;
-
+    top: 50px;
     box-shadow: 0px 0px 8px 0px rgb(223, 255, 255);
+}
+.nav:hover{
+    animation: fade 0.5s ease-in;
+}
+
+/* @keyframes fade {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 100%;
+    }
+}
+@keyframes fadeout {
+    0%{
+        opacity: 0%;
+    }
+    100%{
+        opacity: 100%;
+    }
+} */
+@keyframes dropfromup {
+    0%{
+        transform: translateY(-200px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
 }

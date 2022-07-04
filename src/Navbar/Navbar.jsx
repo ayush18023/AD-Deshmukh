@@ -8,26 +8,43 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Mendrop from './Mendrop';
-
+import { Link } from 'react-router-dom'
 // import { Darkbutton } from '../Components/Button';
 import CloseIcon from '@mui/icons-material/Close';
+import Cart from '../Cart/Cart';
+
+
+import { useSelector,useDispatch } from 'react-redux/es/exports';
+import { CartOn } from '../Redux/Cart';
+import { LogIn,SetUser } from '../Redux/Login';
+
 const axios=require('axios')
 
-export const Navbar = () => {
+export const Navbar = (props) => {
+    const active=props.active
+    const [nav, setnav] = useState('')
+    
+
     const [mclass, setmclass] = useState('gayab');
     const [wclass, setwclass] = useState('gayab');
-    const [nav, setnav] = useState('')
     const [login, setlogin] = useState(0)
     const [alert, setalert] = useState('')
     const [register, setregister] = useState(0)
+    
     const [userlog, setuserlog] = useState({
         emailid:"",password:""
     })
     const [userreg, setuserreg] = useState({
         emailid:"",fname:"",sname:"",password:"",cpassword:""
     })
+   
+    //reducer
+    const cartstatus=useSelector(state=>state.cart.cartstatus)
+    const islogged=useSelector(state=>state.login.islogged)
+    const dispatch=useDispatch()
+    const items=useSelector(state=>state.cart.items)
 
-    
+
     const handlemouse=(n)=>{
         switch (n) {
             case 1:
@@ -68,8 +85,11 @@ export const Navbar = () => {
             const response=await axios.post('http://localhost:5000/log',details)
             console.log(response)
             console.log(response.data)
-            if(response.data==="exists"){
+            if(response.data.msg==='exists'){
                 setalert("Succesfully Loged in")
+                dispatch(LogIn())
+                dispatch(SetUser(response.data.result))
+                setlogin(0)
             }
             else{
                 setalert("Account not found")
@@ -90,6 +110,7 @@ export const Navbar = () => {
         else{
             console.log(userreg)
             const response=await axios.post('http://localhost:5000/reg',userreg)
+            console.log(response)
             if(response.data==="good"){
                 setregister(0)
                 setlogin(1)
@@ -106,16 +127,21 @@ export const Navbar = () => {
         }, 4000);
     }
     useEffect(() => {
-        window.addEventListener('scroll',handlescroll)
-        
+        window.addEventListener('scroll',handlescroll)  
+        if(active){
+            setnav('mouse-in-nav')
+        }
     })
+    useEffect(()=>{
+        login && (document.body.style.overflow = 'hidden');
+        !login && (document.body.style.overflow = 'hidden');
+    },[login,register])
     
-
   return (
 
     <div className='nav' onMouseEnter={()=>setnav('mouse-in-nav')}  onMouseLeave={()=>handlescroll()}>
 
-        <div className={(alert!=='')?('absolute h-20 w-80 top-32 bg-black right-4 p-4 text-white z-10 alert'):('gayab')}>{alert}
+        <div className={(alert!=='')?('absolute h-20 w-80  bg-black right-4 p-4 text-white z-10 alert'):('gayab')}>{alert}
         <span className='absolute top-1 right-1 ' onClick={()=>setalert('')}><CloseIcon/></span></div>
 
         <div className={`top-header ${nav}`}>
@@ -124,12 +150,25 @@ export const Navbar = () => {
                 <span className="space-left"><FacebookIcon/></span>
                 <span className="space-left"><CallIcon/></span>   
             </div>
-            <img src={(nav==="")?("https://ik.imagekit.io/thestylist/Assets/JV/Logo/logo-light.svg"):("https://ik.imagekit.io/thestylist/Assets/JV/Logo/logo-dark.svg")} width="192" height="40" className='logo' alt="" />
+            <Link to='/'><img src={(nav==="")?("https://ik.imagekit.io/thestylist/Assets/JV/Logo/logo-light.svg"):("https://ik.imagekit.io/thestylist/Assets/JV/Logo/logo-dark.svg")} width="192" height="40" className='logo' alt="" /></Link>
             <div className="imp">
                 <span className="space-right"><WhatsAppIcon/></span>
-                <span className="space-right cursor-pointer"><div className='login' onClick={()=>{handlelogin();handlescroll()}} ><PersonOutlineIcon/>Login</div></span>
+
+                <span className="space-right cursor-pointer">
+                    {islogged===0?(
+                        <div className='login' onClick={()=>{handlelogin();handlescroll()}} >
+                            <PersonOutlineIcon/>Login
+                        </div>
+                    ):(
+                        <div>My Account</div>
+                    )}   
+                </span>
+
+
                 <span className="space-right"><SearchIcon/></span>
-                <span className="space-right"> <ShoppingCartIcon/></span>
+                <span className="space-right cursor-pointer" onClick={()=>dispatch(CartOn())}> <ShoppingCartIcon/></span>
+                {/* onClick={()=>setiscart(true)} */}
+                <div className='w-[20px] h-[20px] rounded-[20px] absolute right-1 bottom-6 text-center bg-black  text-white'>{items.length}</div>
             </div>
         </div>
         <div className={`wears ${nav}`} >
@@ -142,7 +181,7 @@ export const Navbar = () => {
 
 
         {/* for login         */}
-        <div className={(login===1)?('login_window'):("gayab")}>
+        <div className={(login===1)?('login_window'):("gayab")} onClick={()=>setlogin(0)}> 
             <div className={(login===1)?("detailslogin flex flex-col items-center"):("gayab")}>
                 <div className="mt-4">LOG IN</div>
                 <div className="absolute top-2 right-2 cursor-pointer" onClick={()=>{setlogin(0)}}><CloseIcon/></div>
@@ -163,7 +202,7 @@ export const Navbar = () => {
 
 
         {/* for registration */}
-        <div className={(register===1)?('login_window'):("gayab")}>
+        <div className={(register===1)?('login_window'):("gayab")} onClick={()=>setregister(0)}>
             <div className={(register===1)?("detailsregister flex flex-col items-center"):("gayab")}>
                 <div className="mt-4">Register</div>
                     <div className="absolute top-2 right-2 cursor-pointer" onClick={()=>{setregister(0)}}><CloseIcon/></div>
@@ -195,7 +234,13 @@ export const Navbar = () => {
                     </form>
                     <div className="mt-4 cursor-pointer" onClick={()=>{setregister(0);setlogin(1)}}>or <b>Login</b> into an account</div>
             </div>
-        </div>                    
+        </div>      
+        
+        {/* sidebar cart               */}
+        {(cartstatus===1)?(<Cart/>):(<></>)}
+    
+
+
     </div>
   )
 }

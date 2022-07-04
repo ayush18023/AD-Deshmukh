@@ -11,16 +11,32 @@ const Gallery = () => {
     const sorted=gimages.filter(gi=>gi.category===selectcat)
     setcat(sorted)
   }
-
+  const galleryitems=[
+    {
+      title:"SHOOTS",
+      category:"shoots"
+    },
+    {
+      title:"PRESS & MEDIA",
+      category:"press&media"
+    },
+    {
+      title:"RUNWAY",
+      category:"runaway"
+    },
+    {
+      title:"CELEBRITIES",
+      category:"celebs"
+    },
+  ]
   return (
     <>
       <div className='container-gallery flex flex-col items-center mt-10 '>
         <div className='text-xl mt-16 text-4xl list-none'>Gallery</div>
         <ul className='flex my-10 cursor-pointer'>
-          <li className="px-10" onClick={()=>selectcategory('shoots')}>SHOOTS</li>
-          <li className='px-10' onClick={()=>selectcategory('press&media')}>PRESS & MEDIA</li>
-          <li className='px-10' onClick={()=>selectcategory('runaway')}>RUNWAY</li>
-          <li className='px-10' onClick={()=>selectcategory('celebs')}>CELEBRITIES</li>
+          {galleryitems.map((gi=>(
+            <li className='px-10 border-b-2 border-b-transparent hover:border-b hover:border-b-black' onClick={()=>selectcategory(gi.category)}>{gi.title}</li>
+          )))}
         </ul>
     </div>
     <div className='gallery_objects flex justify-center pb-10'>
